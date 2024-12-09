@@ -18,7 +18,7 @@ class Message
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
     #[Assert\Regex(
-        pattern: "^[A-Za-z]+([\-'][A-Za-z]+)*/",
+        pattern: "/[A-Za-z]+([\-'][A-Za-z]+)*/",
         message: "Nieprawidłowy format imienia - może zawierać jedynie litery, myślnik oraz apostrof"
     )]
     private ?string $name = null;
