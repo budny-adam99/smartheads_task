@@ -6,10 +6,12 @@ namespace App\Controller;
 
 use App\Entity\Message;
 use App\Form\MessageType;
+use App\Message\MessageEmail;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
 class MessageController extends AbstractController
@@ -17,6 +19,7 @@ class MessageController extends AbstractController
     #[Route('/')]
     public function index(
         EntityManagerInterface $entityManager,
+        MessageBusInterface $messageBus,
         Request $request
     ): Response {
 
@@ -27,6 +30,8 @@ class MessageController extends AbstractController
         {
             $entityManager->persist($entity);
             $entityManager->flush();
+
+            $messageBus->dispatch(new MessageEmail($entity->getId()));
             $this->addFlash('success', "Your message was sent successfully!");
         }
 
