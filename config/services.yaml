@@ -24,8 +24,8 @@ services:
 
     App\Service\EmailService:
         arguments:
-            senderEmail: '%app.contactmailsender%'
-            receiverEmail: '%app.contactmailreceiver%'
+            $senderEmail: '%app.contactmailsender%'
+            $receiverEmail: '%app.contactmailreceiver%'
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
