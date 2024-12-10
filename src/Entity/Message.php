@@ -17,10 +17,7 @@ class Message
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
-    #[Assert\Regex(
-        pattern: "/[A-Za-z]+([\-'][A-Za-z]+)*/",
-        message: "Nieprawidłowy format imienia - może zawierać jedynie litery, myślnik oraz apostrof"
-    )]
+    #[Assert\Type(Types::STRING)]
     private ?string $name = null;
 
     #[ORM\Column(length: 11)]
@@ -30,7 +27,7 @@ class Message
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank]
-    #[Assert\Email]
+    #[Assert\Email(message: "Email nie jest poprawny")]
     private ?string $mail = null;
 
     #[ORM\Column(type: Types::TEXT)]

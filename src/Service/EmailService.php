@@ -22,7 +22,7 @@ class EmailService
         $email = (new TemplatedEmail())
             ->from($this->senderEmail)
             ->to($this->receiverEmail)
-            ->subject("Contact form")
+            ->subject("Wiadomość z formularza kontaktowego")
             ->htmlTemplate('email/contact.html.twig')
             ->context([
                 'message' => $this->messageRepository->find($messageId)

@@ -33,7 +33,9 @@ class MessageController extends AbstractController
             $entityManager->flush();
 
             $messageBus->dispatch(new MessageEmail($entity->getId()));
-            $this->addFlash('success', "Your message was sent successfully!");
+            $this->addFlash('success', "Wiadomość została wysłana");
+
+            return $this->redirectToRoute('message_form');
         }
 
         return $this->render('message/form.html.twig', [

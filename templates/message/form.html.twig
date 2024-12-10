@@ -1,5 +1,14 @@
 {% extends 'base.html.twig' %}
 
+{% form_theme form 'bootstrap_5_layout.html.twig' %}
+
+{% block header %}Formularz kontaktowy{% endblock %}
+
 {% block body %}
+    {% for notification in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ notification }}
+        </div>
+    {% endfor %}
     {{ form(form) }}
 {% endblock %}

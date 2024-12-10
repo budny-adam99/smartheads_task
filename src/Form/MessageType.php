@@ -21,8 +21,12 @@ class MessageType extends AbstractType
     ): void {
 
         $builder
-            ->add('name', TextType::class)
-            ->add('mail', EmailType::class)
+            ->add('name', TextType::class, [
+                'label' => 'Imię',
+            ])
+            ->add('mail', EmailType::class, [
+                'label' => 'E-mail',
+            ])
             ->add('pesel', TextType::class, [
                 'attr' => [
                     'minlength' => 11,
@@ -30,15 +34,19 @@ class MessageType extends AbstractType
                     'size' => 11
                 ]
             ])
-            ->add('content', TextareaType::class)
-            ->add('submit', SubmitType::class)
+            ->add('content', TextareaType::class, [
+                'label' => 'Treść wiadomości'
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Wyślij wiadomość'
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Message::class
+            'data_class' => Message::class,
         ]);
     }
 }
