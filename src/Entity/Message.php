@@ -6,6 +6,7 @@ use App\Repository\MessageRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator as CustomAssert;
 
 #[ORM\Entity(repositoryClass: MessageRepository::class)]
 class Message
@@ -22,7 +23,8 @@ class Message
 
     #[ORM\Column(length: 11)]
     #[Assert\NotBlank]
-    #[Assert\Length(exactly: 11, exactMessage: "Pesel powinien zawierać 11 znaków")]
+    #[Assert\Regex('/^\d{11}/', "Pesel nie jest poprawny!")]
+    #[CustomAssert\PeselConstraint()]
     private ?string $pesel = null;
 
     #[ORM\Column(length: 255)]

@@ -29,9 +29,8 @@ class MessageType extends AbstractType
             ])
             ->add('pesel', TextType::class, [
                 'attr' => [
-                    'minlength' => 11,
-                    'maxlength' => 11,
-                    'size' => 11
+                    'size' => 11,
+                    'pattern' => "^\d{11}"
                 ]
             ])
             ->add('content', TextareaType::class, [
